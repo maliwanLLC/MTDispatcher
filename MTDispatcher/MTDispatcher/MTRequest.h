@@ -27,14 +27,16 @@ NS_ENUM(NSInteger)
     MTErrorTooFewParametersToFillModel = 1003
 };
 
-    // would prefer 'instancetype' instead of id here
-    // but alas 'Unknown type name 'instancetype''
+// would prefer 'instancetype' instead of id here
+// but alas 'Unknown type name 'instancetype''
+// opened radar: http://www.openradar.me/radar?id=1517409
 typedef void (^MTRequestCompletionBlock)(id request, NSError *error);
 typedef void (^MTRequestCancelBlock)();
 
 @interface MTRequest : NSObject {
     @protected
     Class _responseClass;
+    MTResponse *_response;
 }
 
 @property (nonatomic, strong) id owner;
@@ -44,12 +46,11 @@ typedef void (^MTRequestCancelBlock)();
 
 @property (nonatomic, copy) MTRequestCancelBlock cancelBlock;
 @property (nonatomic, copy) MTRequestCompletionBlock completionBlock;
-@property (nonatomic, readonly) MTResponse *response;
 
 + (instancetype)requestWithOwner:(id)owner;
 
 - (NSMutableURLRequest *)serviceURLRequest __attribute__((objc_requires_super));
-
+- (MTResponse *)response;
 - (void)cancel;
 
 @end

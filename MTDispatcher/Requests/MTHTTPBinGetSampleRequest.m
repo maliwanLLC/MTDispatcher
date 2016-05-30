@@ -19,6 +19,10 @@
     return request;
 }
 
+- (MTHTTPBinGetSampleResponse *)response {
+    return (MTHTTPBinGetSampleResponse *)_response;
+}
+
 - (Class)responseClass {
     return MTHTTPBinGetSampleResponse.class;
 }

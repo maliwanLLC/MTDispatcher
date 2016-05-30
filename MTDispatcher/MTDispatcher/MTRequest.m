@@ -49,6 +49,11 @@ static NSTimeInterval   MTRequestTimeoutInterval        = 30;
     }
 }
 
+- (MTResponse *)response __attribute__((unavailable("You should always override this")))
+{
+    return _response;
+}
+
 - (Class)responseClass __attribute__((unavailable("You should always override this")))
 {
     return MTResponse.class;
@@ -58,37 +63,22 @@ static NSTimeInterval   MTRequestTimeoutInterval        = 30;
 {
     NSMutableURLRequest *networkRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@""]];
     
+    // should be loaded from .plist or some configuration file
     // @this should be overriden if needed, or modified in subclass
-    if ([networkRequest valueForHTTPHeaderField:@"Accept"] == nil)
-    {
-        [networkRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    }
-    
-    if ([networkRequest valueForHTTPHeaderField:@"Access-Token"] == nil)
-    {
-        // read from globals?
-        [networkRequest setValue:@"securityToken" forHTTPHeaderField:@"Access-Token"];
-    }
-    
-    if ([networkRequest.HTTPBody length] > 0)
-    {
-        [networkRequest setValue:@([networkRequest.HTTPBody length]).stringValue forHTTPHeaderField:@"Content-Length"];
-    }
-    
-    if ([networkRequest valueForHTTPHeaderField:@"Content-Type"] == nil)
-    {
-        [networkRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    }
-    
-    if (networkRequest.HTTPMethod == nil)
-    {
-        networkRequest.HTTPMethod = @"GET";
-    }
-    
+    [networkRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    // read from globals?
+    [networkRequest setValue:@"securityToken" forHTTPHeaderField:@"Access-Token"];
+    [networkRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    networkRequest.HTTPMethod = @"GET";
     networkRequest.timeoutInterval = MTRequestTimeoutInterval;
     
     return networkRequest;
 }
+
+// @Discussion
+/*
+ Nick: should we add some request post-processing routine (for adding content-length, etc.)
+*/
 
 - (void)cancel
 {

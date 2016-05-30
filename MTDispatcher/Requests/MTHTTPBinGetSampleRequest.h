@@ -8,7 +8,11 @@
 
 #import "MTRequest.h"
 
+@class MTHTTPBinGetSampleResponse;
+
 @interface MTHTTPBinGetSampleRequest : MTRequest
+
+- (MTHTTPBinGetSampleResponse *)response;
 
 @end
 

@@ -24,8 +24,8 @@
     MTHTTPBinGetSampleRequest *getRequest = [MTHTTPBinGetSampleRequest requestWithOwner:self];
     getRequest.completionBlock = ^(MTHTTPBinGetSampleRequest *request, NSError *error) {
         if (error == nil) {
-            NSLog(@"%@", ((MTHTTPBinGetSampleResponse *)request.response).origin);   /// how to get rid of this
-            NSLog(@"%@", ((MTHTTPBinGetSampleResponse *)request.response).url);     //   huge cast?
+            NSLog(@"%@", request.response.origin);
+            NSLog(@"%@", request.response.url);
         }
     };
     
