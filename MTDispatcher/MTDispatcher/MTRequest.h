@@ -27,8 +27,9 @@ NS_ENUM(NSInteger)
     MTErrorTooFewParametersToFillModel = 1003
 };
 
-
-typedef void (^MTRequestCompletionBlock)(MTRequest *request, NSError *error);
+    // would prefer 'instancetype' instead of id here
+    // but alas 'Unknown type name 'instancetype''
+typedef void (^MTRequestCompletionBlock)(id request, NSError *error);
 typedef void (^MTRequestCancelBlock)();
 
 @interface MTRequest : NSObject {

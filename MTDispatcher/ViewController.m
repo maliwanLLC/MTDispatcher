@@ -22,10 +22,10 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     MTHTTPBinGetSampleRequest *getRequest = [MTHTTPBinGetSampleRequest requestWithOwner:self];
-    getRequest.completionBlock = ^(MTRequest *request, NSError *error) {
+    getRequest.completionBlock = ^(MTHTTPBinGetSampleRequest *request, NSError *error) {
         if (error == nil) {
-            NSLog(@"%@", ((MTHTTPBinGetSampleResponse *)((MTHTTPBinGetSampleRequest *)request).response).origin);   /// how to get rid of this
-            NSLog(@"%@", ((MTHTTPBinGetSampleResponse *)((MTHTTPBinGetSampleRequest *)request).response).url);     //   huge cast?
+            NSLog(@"%@", ((MTHTTPBinGetSampleResponse *)request.response).origin);   /// how to get rid of this
+            NSLog(@"%@", ((MTHTTPBinGetSampleResponse *)request.response).url);     //   huge cast?
         }
     };
     
