@@ -8,13 +8,15 @@
 
 #import "MTHTTPBinGetSampleRequest.h"
 
+#import "MTRequest_Common.h"
+
 @implementation MTHTTPBinGetSampleRequest
 
 - (NSMutableURLRequest *)serviceURLRequest {
     NSMutableURLRequest *request = [super serviceURLRequest];
     
-    request.HTTPMethod = @"GET";
-    request.URL = [NSURL URLWithString:@"http://httpbin.org/get"];
+    NSString *requestURLString = [NSMutableString stringWithFormat:@"%@/get", [self baseURLString]];
+    request.URL = [NSURL URLWithString:requestURLString];
     
     return request;
 }

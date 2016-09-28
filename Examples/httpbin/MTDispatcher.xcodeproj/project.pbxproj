@@ -21,6 +21,7 @@
 		CE9301261D9BD1E1008C3A1F /* MTRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE93011E1D9BD1E1008C3A1F /* MTRequest.m */; };
 		CE9301271D9BD1E1008C3A1F /* MTRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9301201D9BD1E1008C3A1F /* MTRequestHandler.m */; };
 		CE9301281D9BD1E1008C3A1F /* MTServiceRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9301221D9BD1E1008C3A1F /* MTServiceRequestHandler.m */; };
+		CE93012B1D9BD28A008C3A1F /* MTRequest_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = CE93012A1D9BD28A008C3A1F /* MTRequest_Common.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,8 @@
 		CE9301201D9BD1E1008C3A1F /* MTRequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTRequestHandler.m; sourceTree = "<group>"; };
 		CE9301211D9BD1E1008C3A1F /* MTServiceRequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTServiceRequestHandler.h; sourceTree = "<group>"; };
 		CE9301221D9BD1E1008C3A1F /* MTServiceRequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTServiceRequestHandler.m; sourceTree = "<group>"; };
+		CE9301291D9BD28A008C3A1F /* MTRequest_Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTRequest_Common.h; sourceTree = "<group>"; };
+		CE93012A1D9BD28A008C3A1F /* MTRequest_Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTRequest_Common.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +86,8 @@
 		CE16782B1CF86B2E004DF629 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				CE9301291D9BD28A008C3A1F /* MTRequest_Common.h */,
+				CE93012A1D9BD28A008C3A1F /* MTRequest_Common.m */,
 				CE16782C1CF86B8C004DF629 /* MTHTTPBinGetSampleRequest.h */,
 				CE16782D1CF86B8C004DF629 /* MTHTTPBinGetSampleRequest.m */,
 			);
@@ -276,6 +281,7 @@
 				CE6F34BB1B3311B000EC025A /* AppDelegate.m in Sources */,
 				CE9301231D9BD1E1008C3A1F /* MTDepotRequestHandler.m in Sources */,
 				CE9301271D9BD1E1008C3A1F /* MTRequestHandler.m in Sources */,
+				CE93012B1D9BD28A008C3A1F /* MTRequest_Common.m in Sources */,
 				CE6F34B81B3311B000EC025A /* main.m in Sources */,
 				CE16782E1CF86B8C004DF629 /* MTHTTPBinGetSampleRequest.m in Sources */,
 			);
