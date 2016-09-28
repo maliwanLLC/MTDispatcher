@@ -2,7 +2,7 @@
 //  MTRequest.h
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 #import "MTDispatcher.h"
 

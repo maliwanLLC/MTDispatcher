@@ -1,8 +1,7 @@
 //
 //  MTDispatcher.h
-//  
+//
 
-#import <Foundation/Foundation.h>
 #import "MTRequest.h"
 
 

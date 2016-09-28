@@ -48,26 +48,26 @@
     NSString *body = request.HTTPBody.length > 0 ? (request.HTTPBody.length > 2048 ? [NSString stringWithFormat:@"    <%lu bytes>", (unsigned long)request.HTTPBody.length]
                                                     : [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]) : @"    <empty>";
     
-    NSLog(@"\n----- [NETWORK REQUEST] -----\n  URL: %@\n  METHOD: %@\n  HEADER FIELDS\n%@  BODY\n%@\n-----------------------------\n",
-          request.URL,
-          request.HTTPMethod,
-          headerFields,
-          body);
+    printf("\n----- [NETWORK REQUEST] -----\n  URL: %s\n  METHOD: %s\n  HEADER FIELDS\n%s  BODY\n%s\n-----------------------------\n",
+           [request.URL.absoluteString UTF8String],
+           [request.HTTPMethod UTF8String],
+           [headerFields UTF8String],
+           [body UTF8String]);
 }
 
 - (void)logNetworkResponse:(NSHTTPURLResponse *)response error:(NSError *)error data:(NSData *)data
 {
     if (error == nil)
     {
-        NSLog(@"\n----- [NETWORK RESPONSE] -----\n  URL: %@\n  STATUS CODE: %li\n HEADER FIELDS\n%@  BODY\n    %@\n------------------------------\n",
-              response.URL,
-              (long)response.statusCode,
-              response.allHeaderFields,
-              data.length > 0 ? [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] : @"<empty>");
+        printf("\n----- [NETWORK RESPONSE] -----\n  URL: %s\n  STATUS CODE: %li\n HEADER FIELDS\n%s  BODY\n    %s\n------------------------------\n",
+               [response.URL.absoluteString UTF8String],
+               (long)response.statusCode,
+               [[response.allHeaderFields description] UTF8String],
+               data.length > 0 ? [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] UTF8String] : [@"<empty>" UTF8String]);
     }
     else
     {
-        NSLog(@"\n----- [NETWORK RESPONSE] -----\n  ERROR: %@\n", [error localizedDescription]);
+        printf("\n----- [NETWORK RESPONSE] -----\n  ERROR: %s\n", [[error localizedDescription] UTF8String]);
     }
 }
 
