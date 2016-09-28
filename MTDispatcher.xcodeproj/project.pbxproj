@@ -20,6 +20,7 @@
 		CE6F34C31B3311B000EC025A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE6F34C21B3311B000EC025A /* Images.xcassets */; };
 		CE6F34C61B3311B000EC025A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6F34C41B3311B000EC025A /* LaunchScreen.xib */; };
 		CE6F34D21B3311B000EC025A /* MTDispatcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6F34D11B3311B000EC025A /* MTDispatcherTests.m */; };
+		CE9301161D9BB997008C3A1F /* MTDispatcher-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE9301151D9BB997008C3A1F /* MTDispatcher-info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		CE6F34CB1B3311B000EC025A /* MTDispatcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTDispatcherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE6F34D01B3311B000EC025A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE6F34D11B3311B000EC025A /* MTDispatcherTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTDispatcherTests.m; sourceTree = "<group>"; };
+		CE9301151D9BB997008C3A1F /* MTDispatcher-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MTDispatcher-info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				CE0C47A11CF5F14D001B3050 /* MTDepotRequestHandler.m */,
 				CE0C47AA1CF5F14D001B3050 /* MTServiceRequestHandler.h */,
 				CE0C47AB1CF5F14D001B3050 /* MTServiceRequestHandler.m */,
+				CE9301151D9BB997008C3A1F /* MTDispatcher-info.plist */,
 			);
 			path = MTDispatcher;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 			files = (
 				CE6F34C11B3311B000EC025A /* Main.storyboard in Resources */,
 				CE6F34C61B3311B000EC025A /* LaunchScreen.xib in Resources */,
+				CE9301161D9BB997008C3A1F /* MTDispatcher-info.plist in Resources */,
 				CE6F34C31B3311B000EC025A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

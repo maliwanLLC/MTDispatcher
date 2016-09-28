@@ -5,11 +5,10 @@
 #import "MTDepotRequestHandler.h"
 
 
-#define LOG_DEPOT_OPERATIONS
-
 @interface MTDepotRequestHandler()
 
 @property (nonatomic, strong) NSMutableSet *currentRequests;
+@property (nonatomic, assign) BOOL logDepotOperations;
 
 @end
 
@@ -22,6 +21,10 @@
     if (self)
     {
         _currentRequests = [[NSMutableSet alloc] init];
+        // load plist config
+        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"MTDispatcher-info" ofType:@"plist"];
+        NSDictionary *plistDictionary = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+        self.logDepotOperations = [plistDictionary[@"LOG_DEPOT_OPERATIONS"] boolValue];
     }
     
     return self;
@@ -36,9 +39,9 @@
 
 - (void)processRequest:(MTRequest *)request
 {
-#ifdef LOG_DEPOT_OPERATIONS
-    NSLog(@"[REQUEST DEPOT]: adding request %@", request);
-#endif // LOG_DEPOT_OPERATIONS
+    if (self.logDepotOperations) {
+        NSLog(@"[REQUEST DEPOT]: adding request %@", request);
+    }
     
     @synchronized (self)
     {
@@ -62,17 +65,17 @@
 
 - (void)cancellAllRequestsWithOwner:(id)owner
 {
-#ifdef LOG_DEPOT_OPERATIONS
-    NSLog(@"[REQUEST DEPOT]: cancelAllRequests owned by %@", owner);
-#endif // LOG_DEPOT_OPERATIONS
+    if (self.logDepotOperations) {
+        NSLog(@"[REQUEST DEPOT]: cancelAllRequests owned by %@", owner);
+    }
     
     for (MTRequest *request in [_currentRequests allObjects])
     {
         if (request.owner == owner)
         {
-#ifdef LOG_DEPOT_OPERATIONS
-            NSLog(@"[REQUEST DEPOT]: cancelling request %@", request);
-#endif // LOG_DEPOT_OPERATIONS
+            if (self.logDepotOperations) {
+                NSLog(@"[REQUEST DEPOT]: cancelling request %@", request);
+            }
             [request cancel];
         }
     }
@@ -80,15 +83,15 @@
 
 - (void)cancellAllRequests
 {
-#ifdef LOG_DEPOT_OPERATIONS
-    NSLog(@"[REQUEST DEPOT]: cancelAllRequests called (%lu requests are in progress)", (unsigned long)_currentRequests.count);
-#endif // LOG_DEPOT_OPERATIONS
+    if (self.logDepotOperations) {
+        NSLog(@"[REQUEST DEPOT]: cancelAllRequests called (%lu requests are in progress)", (unsigned long)_currentRequests.count);
+    }
     
     for (MTRequest *request in _currentRequests)
     {
-#ifdef LOG_DEPOT_OPERATIONS
-        NSLog(@"[REQUEST DEPOT]: cancelling request %@", request);
-#endif // LOG_DEPOT_OPERATIONS
+        if (self.logDepotOperations) {
+            NSLog(@"[REQUEST DEPOT]: cancelling request %@", request);
+        }
         [request cancel];
     }
 }
@@ -98,9 +101,9 @@
 - (void)reportRequest:(MTRequest *)request error:(NSError *)error
 {
     dispatch_async(dispatch_get_main_queue(), ^(void){
-#ifdef LOG_DEPOT_OPERATIONS
-        NSLog(@"[REQUEST DEPOT]: removing request %@", request);
-#endif // LOG_DEPOT_OPERATIONS
+        if (self.logDepotOperations) {
+            NSLog(@"[REQUEST DEPOT]: removing request %@", request);
+        }
         
         @synchronized (self)
         {

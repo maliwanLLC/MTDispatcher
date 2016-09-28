@@ -7,14 +7,10 @@
 #import "MTRequest.h"
 
 
-#define LOG_NETWORK
-
-
 @interface MTServiceRequestHandler ()
-{
-    // general session is general
-    NSURLSession *requestSession_;
-}
+
+@property (nonatomic, strong) NSURLSession *requestSession;
+@property (nonatomic, assign) BOOL logNetwork;
 
 @end
 
@@ -25,10 +21,13 @@
 {
     self = [super init];
     
-    if (self)
-    {
+    if (self != nil) {
         NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-        requestSession_ = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+        self.requestSession = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+        // load plist config
+        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"MTDispatcher-info" ofType:@"plist"];
+        NSDictionary *plistDictionary = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+        self.logNetwork = [plistDictionary[@"LOG_NETWORK"] boolValue];
     }
     
     return self;
@@ -80,22 +79,22 @@
     
     networkRequest = [request serviceURLRequest];
     
-#ifdef LOG_NETWORK
-    [self logNetworkRequest:networkRequest];
-#endif // LOG_NETWORK
+    if (self.logNetwork) {
+        [self logNetworkRequest:networkRequest];
+    }
     
     if (networkRequest != nil)
     {
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
         __block NSData *responseData = nil;
         
-        NSURLSessionDataTask *task = [requestSession_ dataTaskWithRequest:networkRequest
-                                                        completionHandler:^(NSData *data,
-                                                                            NSURLResponse *response,
-                                                                            NSError *error) {
-                                                            responseData = data;
-                                                            dispatch_semaphore_signal(semaphore);
-                                                        }];
+        NSURLSessionDataTask *task = [self.requestSession dataTaskWithRequest:networkRequest
+                                                            completionHandler:^(NSData *data,
+                                                                                NSURLResponse *response,
+                                                                                NSError *error) {
+                                                                responseData = data;
+                                                                dispatch_semaphore_signal(semaphore);
+                                                            }];
         
         if (request.cancelBlock == nil)
         {
@@ -123,9 +122,9 @@
             }
         }
         
-#ifdef LOG_NETWORK
-        [self logNetworkResponse:(NSHTTPURLResponse *)task.response error:task.error data:responseData];
-#endif // LOG_NETWORK
+        if (self.logNetwork) {
+            [self logNetworkResponse:(NSHTTPURLResponse *)task.response error:task.error data:responseData];
+        }
     }
     else
     {

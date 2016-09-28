@@ -6,9 +6,30 @@
 
 NSString * const MTErrorDomain = @"MTErrorDomain";
 
-static NSTimeInterval   MTRequestTimeoutInterval        = 30;
+static NSTimeInterval MTRequestTimeoutInterval;
+static NSArray *MTSuccessStatuses;
+static NSDictionary *MTDefaultHeaders;
+static NSString *MTDefaultMethod;
 
-#define IS_SUCCESSFUL_HTTP_STATUS(r)  (((r) / 100) == 2)
+bool isSuccessfulHTTPStatus(int statusCode) {
+    for (NSString *codeOrRange in MTSuccessStatuses) {
+        if ([codeOrRange rangeOfString:@"-"].location != NSNotFound) {
+            NSArray *components = [codeOrRange componentsSeparatedByString:@"-"];
+            if (components.count == 2) {
+                if ([components[0] integerValue] <= statusCode && [components[1] integerValue] >= statusCode) {
+                    return true;
+                }
+            }
+        } else {
+            // we have single code
+            if (codeOrRange.integerValue == statusCode) {
+                return true;
+            }
+        }
+    }
+    
+    return false;
+}
 
 @interface MTRequest ()
 
@@ -22,6 +43,17 @@ static NSTimeInterval   MTRequestTimeoutInterval        = 30;
 
 + (instancetype)requestWithOwner:(id)owner
 {
+    // read defaults from plist only first time request is created
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"MTDispatcher-info" ofType:@"plist"];
+        NSDictionary *plistDictionary = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+        MTRequestTimeoutInterval = [plistDictionary[@"TIMEOUT_INTERVAL"] integerValue];
+        MTSuccessStatuses = plistDictionary[@"SUCESS_STATUS_CODES"];
+        MTDefaultMethod = plistDictionary[@"DEFAULT_METHOD"];
+        MTDefaultHeaders = plistDictionary[@"HTTP_HEADERS"];
+    });
+    
     MTRequest *request = [[[self class] alloc] init];
     
     request.owner = owner;
@@ -63,22 +95,15 @@ static NSTimeInterval   MTRequestTimeoutInterval        = 30;
 {
     NSMutableURLRequest *networkRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@""]];
     
-    // should be loaded from .plist or some configuration file
-    // @this should be overriden if needed, or modified in subclass
-    [networkRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    // read from globals?
-    [networkRequest setValue:@"securityToken" forHTTPHeaderField:@"Access-Token"];
-    [networkRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    networkRequest.HTTPMethod = @"GET";
+    [MTDefaultHeaders enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        [networkRequest setValue:obj forHTTPHeaderField:key];
+    }];
+    
+    networkRequest.HTTPMethod = MTDefaultMethod;
     networkRequest.timeoutInterval = MTRequestTimeoutInterval;
     
     return networkRequest;
 }
-
-// @Discussion
-/*
- Nick: should we add some request post-processing routine (for adding content-length, etc.)
-*/
 
 - (void)cancel
 {
@@ -109,7 +134,7 @@ static NSTimeInterval   MTRequestTimeoutInterval        = 30;
 
 - (void)parseResponse:(NSHTTPURLResponse *)networkResponse data:(NSData *)responseData error:(NSError *)error
 {
-    if (IS_SUCCESSFUL_HTTP_STATUS(networkResponse.statusCode))
+    if (isSuccessfulHTTPStatus((int)networkResponse.statusCode))
     {
         // try to extract error message
         NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
