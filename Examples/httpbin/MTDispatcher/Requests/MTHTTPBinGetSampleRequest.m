@@ -10,6 +10,19 @@
 
 #import "MTRequest_Common.h"
 
+@implementation MTHTTPBinGetSampleResponse
+
+- (void)parseResponse:(NSHTTPURLResponse *)networkResponse data:(NSData *)responseData error:(NSError *)error {
+    [super parseResponse:networkResponse data:responseData error:error];
+    
+    if (error == nil) {
+        _origin = _jsonDictionary[@"origin"];
+        _url = _jsonDictionary[@"url"];
+    }
+}
+
+@end
+
 @implementation MTHTTPBinGetSampleRequest
 
 - (NSMutableURLRequest *)serviceURLRequest {
@@ -27,19 +40,6 @@
 
 - (Class)responseClass {
     return MTHTTPBinGetSampleResponse.class;
-}
-
-@end
-
-@implementation MTHTTPBinGetSampleResponse
-
-- (void)parseResponse:(NSHTTPURLResponse *)networkResponse data:(NSData *)responseData error:(NSError *)error {
-    [super parseResponse:networkResponse data:responseData error:error];
-    
-    if (error == nil) {
-        _origin = _jsonDictionary[@"origin"];
-        _url = _jsonDictionary[@"url"];
-    }
 }
 
 @end

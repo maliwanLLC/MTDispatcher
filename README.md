@@ -106,3 +106,16 @@ Library is to certain extent configurable through MTDispatcher-info.plist file
 ```
 
 here you can configure logging options, timeout interval, accept status codes, default http headers and default request methods
+
+## Code Generation
+Dispatcher contains code generation script to create your request subclasses
+
+###DISPATCHER_CODEGEN.sh
+
+ how to use:
+ 1. copy script to some temp folder
+ 2. cd to that folder
+ 3. give script rights to write files: "chmod 755 DISPATCHER_CODEGEN.sh"
+ 4. run: "./DISPATCHER_CODEGEN.sh RequestName" (think FAGetArticleList)
+ 
+ you'll see request/response templates created, just drag and drop them to your Requests folder and implement request building, response parsing

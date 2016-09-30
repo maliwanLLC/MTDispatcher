@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		CE16782E1CF86B8C004DF629 /* MTHTTPBinGetSampleRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE16782D1CF86B8C004DF629 /* MTHTTPBinGetSampleRequest.m */; };
+		CE23BB451D9E6E00004E4402 /* MTDepotRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE23BB3B1D9E6E00004E4402 /* MTDepotRequestHandler.m */; };
+		CE23BB461D9E6E00004E4402 /* MTDispatcher-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE23BB3C1D9E6E00004E4402 /* MTDispatcher-info.plist */; };
+		CE23BB471D9E6E00004E4402 /* MTDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = CE23BB3E1D9E6E00004E4402 /* MTDispatcher.m */; };
+		CE23BB481D9E6E00004E4402 /* MTRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE23BB401D9E6E00004E4402 /* MTRequest.m */; };
+		CE23BB491D9E6E00004E4402 /* MTRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE23BB421D9E6E00004E4402 /* MTRequestHandler.m */; };
+		CE23BB4A1D9E6E00004E4402 /* MTServiceRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE23BB441D9E6E00004E4402 /* MTServiceRequestHandler.m */; };
 		CE6F34B81B3311B000EC025A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6F34B71B3311B000EC025A /* main.m */; };
 		CE6F34BB1B3311B000EC025A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6F34BA1B3311B000EC025A /* AppDelegate.m */; };
 		CE6F34BE1B3311B000EC025A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6F34BD1B3311B000EC025A /* ViewController.m */; };
@@ -15,12 +21,6 @@
 		CE6F34C31B3311B000EC025A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE6F34C21B3311B000EC025A /* Images.xcassets */; };
 		CE6F34C61B3311B000EC025A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6F34C41B3311B000EC025A /* LaunchScreen.xib */; };
 		CE6F34D21B3311B000EC025A /* MTDispatcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6F34D11B3311B000EC025A /* MTDispatcherTests.m */; };
-		CE9301231D9BD1E1008C3A1F /* MTDepotRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9301191D9BD1E1008C3A1F /* MTDepotRequestHandler.m */; };
-		CE9301241D9BD1E1008C3A1F /* MTDispatcher-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE93011A1D9BD1E1008C3A1F /* MTDispatcher-info.plist */; };
-		CE9301251D9BD1E1008C3A1F /* MTDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = CE93011C1D9BD1E1008C3A1F /* MTDispatcher.m */; };
-		CE9301261D9BD1E1008C3A1F /* MTRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE93011E1D9BD1E1008C3A1F /* MTRequest.m */; };
-		CE9301271D9BD1E1008C3A1F /* MTRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9301201D9BD1E1008C3A1F /* MTRequestHandler.m */; };
-		CE9301281D9BD1E1008C3A1F /* MTServiceRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9301221D9BD1E1008C3A1F /* MTServiceRequestHandler.m */; };
 		CE93012B1D9BD28A008C3A1F /* MTRequest_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = CE93012A1D9BD28A008C3A1F /* MTRequest_Common.m */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +37,17 @@
 /* Begin PBXFileReference section */
 		CE16782C1CF86B8C004DF629 /* MTHTTPBinGetSampleRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTHTTPBinGetSampleRequest.h; sourceTree = "<group>"; };
 		CE16782D1CF86B8C004DF629 /* MTHTTPBinGetSampleRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTHTTPBinGetSampleRequest.m; sourceTree = "<group>"; };
+		CE23BB3A1D9E6E00004E4402 /* MTDepotRequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDepotRequestHandler.h; sourceTree = "<group>"; };
+		CE23BB3B1D9E6E00004E4402 /* MTDepotRequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDepotRequestHandler.m; sourceTree = "<group>"; };
+		CE23BB3C1D9E6E00004E4402 /* MTDispatcher-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MTDispatcher-info.plist"; sourceTree = "<group>"; };
+		CE23BB3D1D9E6E00004E4402 /* MTDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDispatcher.h; sourceTree = "<group>"; };
+		CE23BB3E1D9E6E00004E4402 /* MTDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDispatcher.m; sourceTree = "<group>"; };
+		CE23BB3F1D9E6E00004E4402 /* MTRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTRequest.h; sourceTree = "<group>"; };
+		CE23BB401D9E6E00004E4402 /* MTRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTRequest.m; sourceTree = "<group>"; };
+		CE23BB411D9E6E00004E4402 /* MTRequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTRequestHandler.h; sourceTree = "<group>"; };
+		CE23BB421D9E6E00004E4402 /* MTRequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTRequestHandler.m; sourceTree = "<group>"; };
+		CE23BB431D9E6E00004E4402 /* MTServiceRequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTServiceRequestHandler.h; sourceTree = "<group>"; };
+		CE23BB441D9E6E00004E4402 /* MTServiceRequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTServiceRequestHandler.m; sourceTree = "<group>"; };
 		CE6F34B21B3311B000EC025A /* MTDispatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MTDispatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE6F34B61B3311B000EC025A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE6F34B71B3311B000EC025A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -50,17 +61,6 @@
 		CE6F34CB1B3311B000EC025A /* MTDispatcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTDispatcherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE6F34D01B3311B000EC025A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE6F34D11B3311B000EC025A /* MTDispatcherTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTDispatcherTests.m; sourceTree = "<group>"; };
-		CE9301181D9BD1E1008C3A1F /* MTDepotRequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDepotRequestHandler.h; sourceTree = "<group>"; };
-		CE9301191D9BD1E1008C3A1F /* MTDepotRequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDepotRequestHandler.m; sourceTree = "<group>"; };
-		CE93011A1D9BD1E1008C3A1F /* MTDispatcher-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MTDispatcher-info.plist"; sourceTree = "<group>"; };
-		CE93011B1D9BD1E1008C3A1F /* MTDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDispatcher.h; sourceTree = "<group>"; };
-		CE93011C1D9BD1E1008C3A1F /* MTDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDispatcher.m; sourceTree = "<group>"; };
-		CE93011D1D9BD1E1008C3A1F /* MTRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTRequest.h; sourceTree = "<group>"; };
-		CE93011E1D9BD1E1008C3A1F /* MTRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTRequest.m; sourceTree = "<group>"; };
-		CE93011F1D9BD1E1008C3A1F /* MTRequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTRequestHandler.h; sourceTree = "<group>"; };
-		CE9301201D9BD1E1008C3A1F /* MTRequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTRequestHandler.m; sourceTree = "<group>"; };
-		CE9301211D9BD1E1008C3A1F /* MTServiceRequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTServiceRequestHandler.h; sourceTree = "<group>"; };
-		CE9301221D9BD1E1008C3A1F /* MTServiceRequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTServiceRequestHandler.m; sourceTree = "<group>"; };
 		CE9301291D9BD28A008C3A1F /* MTRequest_Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTRequest_Common.h; sourceTree = "<group>"; };
 		CE93012A1D9BD28A008C3A1F /* MTRequest_Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTRequest_Common.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +94,25 @@
 			path = Requests;
 			sourceTree = "<group>";
 		};
+		CE23BB391D9E6E00004E4402 /* MTDispatcher */ = {
+			isa = PBXGroup;
+			children = (
+				CE23BB3A1D9E6E00004E4402 /* MTDepotRequestHandler.h */,
+				CE23BB3B1D9E6E00004E4402 /* MTDepotRequestHandler.m */,
+				CE23BB3C1D9E6E00004E4402 /* MTDispatcher-info.plist */,
+				CE23BB3D1D9E6E00004E4402 /* MTDispatcher.h */,
+				CE23BB3E1D9E6E00004E4402 /* MTDispatcher.m */,
+				CE23BB3F1D9E6E00004E4402 /* MTRequest.h */,
+				CE23BB401D9E6E00004E4402 /* MTRequest.m */,
+				CE23BB411D9E6E00004E4402 /* MTRequestHandler.h */,
+				CE23BB421D9E6E00004E4402 /* MTRequestHandler.m */,
+				CE23BB431D9E6E00004E4402 /* MTServiceRequestHandler.h */,
+				CE23BB441D9E6E00004E4402 /* MTServiceRequestHandler.m */,
+			);
+			name = MTDispatcher;
+			path = ../../../MTDispatcher;
+			sourceTree = "<group>";
+		};
 		CE6F34A91B3311B000EC025A = {
 			isa = PBXGroup;
 			children = (
@@ -122,7 +141,7 @@
 				CE6F34BF1B3311B000EC025A /* Main.storyboard */,
 				CE6F34C21B3311B000EC025A /* Images.xcassets */,
 				CE6F34C41B3311B000EC025A /* LaunchScreen.xib */,
-				CE9301171D9BD1E1008C3A1F /* MTDispatcher */,
+				CE23BB391D9E6E00004E4402 /* MTDispatcher */,
 				CE16782B1CF86B2E004DF629 /* Requests */,
 				CE6F34B51B3311B000EC025A /* Supporting Files */,
 			);
@@ -153,24 +172,6 @@
 				CE6F34D01B3311B000EC025A /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		CE9301171D9BD1E1008C3A1F /* MTDispatcher */ = {
-			isa = PBXGroup;
-			children = (
-				CE9301181D9BD1E1008C3A1F /* MTDepotRequestHandler.h */,
-				CE9301191D9BD1E1008C3A1F /* MTDepotRequestHandler.m */,
-				CE93011A1D9BD1E1008C3A1F /* MTDispatcher-info.plist */,
-				CE93011B1D9BD1E1008C3A1F /* MTDispatcher.h */,
-				CE93011C1D9BD1E1008C3A1F /* MTDispatcher.m */,
-				CE93011D1D9BD1E1008C3A1F /* MTRequest.h */,
-				CE93011E1D9BD1E1008C3A1F /* MTRequest.m */,
-				CE93011F1D9BD1E1008C3A1F /* MTRequestHandler.h */,
-				CE9301201D9BD1E1008C3A1F /* MTRequestHandler.m */,
-				CE9301211D9BD1E1008C3A1F /* MTServiceRequestHandler.h */,
-				CE9301221D9BD1E1008C3A1F /* MTServiceRequestHandler.m */,
-			);
-			path = MTDispatcher;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,7 +256,7 @@
 			files = (
 				CE6F34C11B3311B000EC025A /* Main.storyboard in Resources */,
 				CE6F34C61B3311B000EC025A /* LaunchScreen.xib in Resources */,
-				CE9301241D9BD1E1008C3A1F /* MTDispatcher-info.plist in Resources */,
+				CE23BB461D9E6E00004E4402 /* MTDispatcher-info.plist in Resources */,
 				CE6F34C31B3311B000EC025A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -274,16 +275,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE23BB481D9E6E00004E4402 /* MTRequest.m in Sources */,
+				CE23BB4A1D9E6E00004E4402 /* MTServiceRequestHandler.m in Sources */,
 				CE6F34BE1B3311B000EC025A /* ViewController.m in Sources */,
-				CE9301261D9BD1E1008C3A1F /* MTRequest.m in Sources */,
-				CE9301251D9BD1E1008C3A1F /* MTDispatcher.m in Sources */,
-				CE9301281D9BD1E1008C3A1F /* MTServiceRequestHandler.m in Sources */,
 				CE6F34BB1B3311B000EC025A /* AppDelegate.m in Sources */,
-				CE9301231D9BD1E1008C3A1F /* MTDepotRequestHandler.m in Sources */,
-				CE9301271D9BD1E1008C3A1F /* MTRequestHandler.m in Sources */,
+				CE23BB451D9E6E00004E4402 /* MTDepotRequestHandler.m in Sources */,
+				CE23BB491D9E6E00004E4402 /* MTRequestHandler.m in Sources */,
 				CE93012B1D9BD28A008C3A1F /* MTRequest_Common.m in Sources */,
 				CE6F34B81B3311B000EC025A /* main.m in Sources */,
 				CE16782E1CF86B8C004DF629 /* MTHTTPBinGetSampleRequest.m in Sources */,
+				CE23BB471D9E6E00004E4402 /* MTDispatcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,17 +8,15 @@
 
 #import "MTRequest.h"
 
-@class MTHTTPBinGetSampleResponse;
-
-@interface MTHTTPBinGetSampleRequest : MTRequest
-
-- (MTHTTPBinGetSampleResponse *)response;
-
-@end
-
 @interface MTHTTPBinGetSampleResponse : MTResponse
 
 @property (nonatomic, readonly) NSString *origin;
 @property (nonatomic, readonly) NSString *url;
+
+@end
+
+@interface MTHTTPBinGetSampleRequest : MTRequest
+
+- (MTHTTPBinGetSampleResponse *)response;
 
 @end
