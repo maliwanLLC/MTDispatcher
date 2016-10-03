@@ -41,8 +41,7 @@ bool isSuccessfulHTTPStatus(int statusCode) {
 
 @synthesize responseClass = _responseClass;
 
-+ (instancetype)requestWithOwner:(id)owner
-{
++ (instancetype)requestWithOwner:(id)owner {
     // read defaults from plist only first time request is created
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -55,18 +54,15 @@ bool isSuccessfulHTTPStatus(int statusCode) {
     });
     
     MTRequest *request = [[[self class] alloc] init];
-    
     request.owner = owner;
     
     return request;
 }
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
-    if (self)
-    {
+    if (self != nil) {
         // generates empty response
         _response = [[self.responseClass alloc] init];
     }
@@ -81,18 +77,15 @@ bool isSuccessfulHTTPStatus(int statusCode) {
     }
 }
 
-- (MTResponse *)response __attribute__((unavailable("You should always override this")))
-{
+- (MTResponse *)response __attribute__((unavailable("You should always override this"))) {
     return _response;
 }
 
-- (Class)responseClass __attribute__((unavailable("You should always override this")))
-{
+- (Class)responseClass __attribute__((unavailable("You should always override this"))) {
     return MTResponse.class;
 }
 
-- (NSMutableURLRequest *)serviceURLRequest;
-{
+- (NSMutableURLRequest *)serviceURLRequest {
     NSMutableURLRequest *networkRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@""]];
     
     [MTDefaultHeaders enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
@@ -105,17 +98,14 @@ bool isSuccessfulHTTPStatus(int statusCode) {
     return networkRequest;
 }
 
-- (void)cancel
-{
-    if (_canceled)
-    {
+- (void)cancel {
+    if (_canceled) {
         return;
     }
     
     _canceled = YES;
     
-    if (_cancelBlock != nil)
-    {
+    if (_cancelBlock != nil) {
         _cancelBlock();
     }
 }
@@ -132,20 +122,15 @@ bool isSuccessfulHTTPStatus(int statusCode) {
 
 @synthesize jsonDictionary = _jsonDictionary;
 
-- (void)parseResponse:(NSHTTPURLResponse *)networkResponse data:(NSData *)responseData error:(NSError *)error
-{
-    if (isSuccessfulHTTPStatus((int)networkResponse.statusCode))
-    {
+- (void)parseResponse:(NSHTTPURLResponse *)networkResponse data:(NSData *)responseData error:(NSError *)error {
+    if (isSuccessfulHTTPStatus((int)networkResponse.statusCode)) {
         // try to extract error message
         NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
         
-        if (!error)
-        {
+        if (!error) {
             _jsonDictionary = jsonDict;
         }
-    }
-    else
-    {
+    } else {
         error = [NSError errorWithDomain:MTErrorDomain code:networkResponse.statusCode userInfo:nil];
     }
 }

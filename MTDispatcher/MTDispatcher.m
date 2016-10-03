@@ -18,13 +18,11 @@
 
 #pragma mark - Singleton
 
-+ (MTDispatcher *)sharedInstance
-{
++ (MTDispatcher *)sharedInstance {
     static MTDispatcher *sharedInstance = nil;
     static dispatch_once_t pred;
     
-    if (!sharedInstance)
-    {
+    if (sharedInstance == nil) {
         dispatch_once(&pred, ^{
             sharedInstance = [[super alloc] initUniqueInstance];
             
@@ -45,13 +43,11 @@
 
 #pragma mark - Request processing
 
-- (void)processRequest:(MTRequest *)request
-{
+- (void)processRequest:(MTRequest *)request {
     [self.headRequestHandler processRequest:request];
 }
 
-- (void)cancelAllRequestsWithOwner:(id)owner
-{
+- (void)cancelAllRequestsWithOwner:(id)owner {
     [self.headRequestHandler cancellAllRequestsWithOwner:owner];
 }
 

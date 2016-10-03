@@ -17,8 +17,7 @@
 
 @implementation MTServiceRequestHandler
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     
     if (self != nil) {
@@ -35,12 +34,10 @@
 
 #pragma mark - request logging
 
-- (void)logNetworkRequest:(NSURLRequest *)request
-{
+- (void)logNetworkRequest:(NSURLRequest *)request {
     NSMutableString *headerFields = [NSMutableString string];
     
-    for (NSString *field in [request.allHTTPHeaderFields allKeys])
-    {
+    for (NSString *field in [request.allHTTPHeaderFields allKeys]) {
         [headerFields appendFormat:@"    %@: %@\n", field, [request.allHTTPHeaderFields valueForKey:field]];
     }
     
@@ -54,26 +51,21 @@
            [body UTF8String]);
 }
 
-- (void)logNetworkResponse:(NSHTTPURLResponse *)response error:(NSError *)error data:(NSData *)data
-{
-    if (error == nil)
-    {
+- (void)logNetworkResponse:(NSHTTPURLResponse *)response error:(NSError *)error data:(NSData *)data {
+    if (error == nil) {
         printf("\n----- [NETWORK RESPONSE] -----\n  URL: %s\n  STATUS CODE: %li\n HEADER FIELDS\n%s  BODY\n    %s\n------------------------------\n",
                [response.URL.absoluteString UTF8String],
                (long)response.statusCode,
                [[response.allHeaderFields description] UTF8String],
                data.length > 0 ? [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] UTF8String] : [@"<empty>" UTF8String]);
-    }
-    else
-    {
+    } else {
         printf("\n----- [NETWORK RESPONSE] -----\n  ERROR: %s\n", [[error localizedDescription] UTF8String]);
     }
 }
 
 #pragma mark - Common request processing methods
 
-- (void)processRequest:(MTRequest *)request
-{
+- (void)processRequest:(MTRequest *)request {
     NSURLRequest *networkRequest = nil;
     NSError *error = nil;
     
@@ -83,8 +75,7 @@
         [self logNetworkRequest:networkRequest];
     }
     
-    if (networkRequest != nil)
-    {
+    if (networkRequest != nil) {
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
         __block NSData *responseData = nil;
         
@@ -96,10 +87,8 @@
                                                                 dispatch_semaphore_signal(semaphore);
                                                             }];
         
-        if (request.cancelBlock == nil)
-        {
-            request.cancelBlock = ^
-            {
+        if (request.cancelBlock == nil) {
+            request.cancelBlock = ^{
                 [task cancel];
                 dispatch_semaphore_signal(semaphore);
             };
@@ -109,12 +98,9 @@
         
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         
-        if ([request isCanceled])
-        {
+        if ([request isCanceled]) {
             NSLog(@"[SERVICE REQUEST]: cancelled request %@", request);
-        }
-        else
-        {
+        } else {
             if (task.error == nil) {
                 [request.response parseResponse:(NSHTTPURLResponse *)task.response data:responseData error:error];
             } else {
@@ -125,9 +111,7 @@
         if (self.logNetwork) {
             [self logNetworkResponse:(NSHTTPURLResponse *)task.response error:task.error data:responseData];
         }
-    }
-    else
-    {
+    } else {
         // invalid client state or method is not implemented
         error =[NSError errorWithDomain:MTErrorDomain code:0 userInfo:nil];
     }

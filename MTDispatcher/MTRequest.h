@@ -19,8 +19,7 @@ extern NSString * const MTErrorDomain;
  @enum MTDispatcher-related Error Codes
  @abstract Constants used by NSError to indicate errors in the MTDispatcher domain
  */
-NS_ENUM(NSInteger)
-{
+NS_ENUM(NSInteger) {
     MTErrorUnknown = 			-1,
     MTErrorSerializationFailed   =     1001,
     MTErrorMappingFailed = 1002,
