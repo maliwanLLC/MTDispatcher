@@ -112,15 +112,7 @@ bool isSuccessfulHTTPStatus(int statusCode) {
 
 @end
 
-@interface MTResponse ()
-
-@property (nonatomic, strong) NSDictionary *jsonDictionary;
-
-@end
-
 @implementation MTResponse
-
-@synthesize jsonDictionary = _jsonDictionary;
 
 - (void)parseResponse:(NSHTTPURLResponse *)networkResponse data:(NSData *)responseData error:(NSError *)error {
     if (isSuccessfulHTTPStatus((int)networkResponse.statusCode)) {

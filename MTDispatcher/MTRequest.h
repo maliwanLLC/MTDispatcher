@@ -4,8 +4,6 @@
 
 @import Foundation;
 
-#import "MTDispatcher.h"
-
 @class MTRequest;
 @class MTResponse;
 

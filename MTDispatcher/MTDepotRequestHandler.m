@@ -30,11 +30,9 @@
 
 - (void)dealloc {
     [self cancellAllRequests];
-    self.nextHandler = nil;
 }
 
-- (void)processRequest:(MTRequest *)request
-{
+- (void)processRequest:(MTRequest *)request {
     if (self.logDepotOperations) {
         NSLog(@"[REQUEST DEPOT]: adding request %@", request);
     }

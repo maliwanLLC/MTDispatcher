@@ -9,7 +9,6 @@
 
 @interface MTDispatcher ()
 
-@property (nonatomic, strong) MTServiceRequestHandler *serviceRequestHandler;
 @property (nonatomic, strong) MTRequestHandler *headRequestHandler;
 
 @end
@@ -28,9 +27,7 @@
             
             sharedInstance.headRequestHandler = [[MTDepotRequestHandler alloc] init];
             MTRequestHandler *tail = sharedInstance.headRequestHandler;
-            
-            sharedInstance.serviceRequestHandler = [[MTServiceRequestHandler alloc] init];
-            tail.nextHandler = sharedInstance.serviceRequestHandler;
+            tail.nextHandler = [[MTServiceRequestHandler alloc] init];
         });
     }
     
