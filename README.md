@@ -1,6 +1,12 @@
 # MTDispatcher
 networking engine based on chain of responsibility pattern
 
+## Table of Contents
+* [Installation](#installation)
+* [Usage](#usage)
+* [Configurability](#configurability)
+* [Code Generation](#code-generation)
+
 ## Installation
 drag and drop contents of MTDispatcher folder to your project's vendor folder
 
@@ -66,14 +72,14 @@ and make an actual call
 
 ```objc
 MTHTTPBinGetSampleRequest *getRequest = [MTHTTPBinGetSampleRequest requestWithOwner:self];
-    getRequest.completionBlock = ^(MTHTTPBinGetSampleRequest *request, NSError *error) {
+getRequest.completionBlock = ^(MTHTTPBinGetSampleRequest *request, NSError *error) {
         if (error == nil) {
-            // get parsed objec(s) from request.response and do your voodoo
+            // get parsed object(s) from request.response and do your voodoo
             // this is called in main thread, so you can safely update UI here
         }
     };
     
-    [[MTDispatcher sharedInstance] processRequest:getRequest];
+[[MTDispatcher sharedInstance] processRequest:getRequest];
 ```
 
 ## Configurability
