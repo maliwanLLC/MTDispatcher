@@ -18,14 +18,14 @@
     nextHandler.previousHandler = self;
 }
 
-- (void)processRequest:(MTRequest *)request {
-    if (!request.completed && !request.canceled && _nextHandler != nil) {
-        [_nextHandler processRequest:request];
+- (void)processRequest:(MTRequest *)request  error:(NSError *)error {
+    if (!request.completed && !request.canceled && _nextHandler != nil && error == nil) {
+        [_nextHandler processRequest:request error:error];
     } else {
-        // either we have no next handler (exausted the queue) or request is marked for cancelation
+        // either we have no next handler (exausted the queue) or request is marked for cancelation or an error occured
         // in either way we mark it as completed and finish processing
         request.completed = YES;
-        [_previousHandler reportRequest:request error:nil];
+        [self reportRequest:request error:error];
     }
 }
 
@@ -45,9 +45,6 @@
 }
 
 - (void)cancellAllRequestsWithOwner:(id)owner {
-}
-
-- (void)cancellAllRequests {
 }
 
 @end

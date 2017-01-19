@@ -85,8 +85,8 @@ if [ "$reqeust_name" != "" ]; then
     echo "$file.m has been created"
 
     else
-    echo "[ERROR!] Provide VIPER module name"
+    echo "[ERROR!] Provide Request name"
     echo "Call this script with at least 1 parameter"
-    echo "sh VIPER_GEN NewModuleName"
+    echo "sh DISPATCHER_CODEGEN NewModuleName"
     exit 0
 fi

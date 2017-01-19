@@ -65,9 +65,8 @@
 
 #pragma mark - Common request processing methods
 
-- (void)processRequest:(MTRequest *)request {
+- (void)processRequest:(MTRequest *)request error:(NSError *)error {
     NSURLRequest *networkRequest = nil;
-    NSError *error = nil;
     
     networkRequest = [request serviceURLRequest];
     
@@ -116,8 +115,7 @@
         error =[NSError errorWithDomain:MTErrorDomain code:0 userInfo:nil];
     }
     
-    // feedback
-    [super reportRequest:request error:error];
+    [super processRequest:request error:error];
 }
 
 @end

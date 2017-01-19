@@ -28,11 +28,11 @@
     return self;
 }
 
-- (void)dealloc {
-    [self cancellAllRequests];
-}
+#pragma mark - processing
 
-- (void)processRequest:(MTRequest *)request {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-missing-super-calls"
+- (void)processRequest:(MTRequest *)request error:(NSError *)error {
     if (self.logDepotOperations) {
         NSLog(@"[REQUEST DEPOT]: adding request %@", request);
     }
@@ -42,37 +42,10 @@
     }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        [super processRequest:request];
+        [super processRequest:request error:error];
     });
 }
-
-- (void)cancellAllRequestsWithOwner:(id)owner {
-    if (self.logDepotOperations) {
-        NSLog(@"[REQUEST DEPOT]: cancelAllRequests owned by %@", owner);
-    }
-    
-    for (MTRequest *request in [_currentRequests allObjects]) {
-        if (request.owner == owner) {
-            if (self.logDepotOperations) {
-                NSLog(@"[REQUEST DEPOT]: cancelling request %@", request);
-            }
-            [request cancel];
-        }
-    }
-}
-
-- (void)cancellAllRequests {
-    if (self.logDepotOperations) {
-        NSLog(@"[REQUEST DEPOT]: cancelAllRequests called (%lu requests are in progress)", (unsigned long)_currentRequests.count);
-    }
-    
-    for (MTRequest *request in _currentRequests) {
-        if (self.logDepotOperations) {
-            NSLog(@"[REQUEST DEPOT]: cancelling request %@", request);
-        }
-        [request cancel];
-    }
-}
+#pragma clang diagnostic pop
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-missing-super-calls"
@@ -89,5 +62,22 @@
     });
 }
 #pragma clang diagnostic pop
+
+#pragma mark - cancelation
+
+- (void)cancellAllRequestsWithOwner:(id)owner {
+    if (self.logDepotOperations) {
+        NSLog(@"[REQUEST DEPOT]: cancelAllRequests owned by %@", owner);
+    }
+    
+    for (MTRequest *request in [_currentRequests allObjects]) {
+        if (request.owner == owner) {
+            if (self.logDepotOperations) {
+                NSLog(@"[REQUEST DEPOT]: cancelling request %@", request);
+            }
+            [request cancel];
+        }
+    }
+}
 
 @end

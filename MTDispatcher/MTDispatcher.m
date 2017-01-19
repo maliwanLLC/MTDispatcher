@@ -41,7 +41,7 @@
 #pragma mark - Request processing
 
 - (void)processRequest:(MTRequest *)request {
-    [self.headRequestHandler processRequest:request];
+    [self.headRequestHandler processRequest:request error:nil];
 }
 
 - (void)cancelAllRequestsWithOwner:(id)owner {
