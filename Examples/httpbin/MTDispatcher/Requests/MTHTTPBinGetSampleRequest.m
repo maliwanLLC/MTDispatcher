@@ -12,13 +12,15 @@
 
 @implementation MTHTTPBinGetSampleResponse
 
-- (void)parseResponse:(NSHTTPURLResponse *)networkResponse data:(NSData *)responseData error:(NSError *)error {
-    [super parseResponse:networkResponse data:responseData error:error];
+- (NSError *)parseResponse:(NSHTTPURLResponse *)networkResponse data:(NSData *)responseData {
+    NSError *error = [super parseResponse:networkResponse data:responseData];
     
     if (error == nil) {
         _origin = _jsonDictionary[@"origin"];
         _url = _jsonDictionary[@"url"];
     }
+    
+    return error;
 }
 
 @end

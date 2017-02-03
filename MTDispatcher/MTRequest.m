@@ -114,16 +114,24 @@ bool isSuccessfulHTTPStatus(int statusCode) {
 
 @implementation MTResponse
 
-- (void)parseResponse:(NSHTTPURLResponse *)networkResponse data:(NSData *)responseData error:(NSError *)error {
+- (NSError *)parseResponse:(NSHTTPURLResponse *)networkResponse data:(NSData *)responseData {
     if (isSuccessfulHTTPStatus((int)networkResponse.statusCode)) {
         // try to extract error message
-        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+        NSError *serializationError = nil;
+        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&serializationError];
         
-        if (!error) {
+        if (jsonDict) {
             _jsonDictionary = jsonDict;
+            return nil;
+        } else {
+            return [NSError errorWithDomain:MTErrorDomain
+                                       code:networkResponse.statusCode
+                                   userInfo:@{NSUnderlyingErrorKey : serializationError}];
         }
     } else {
-        error = [NSError errorWithDomain:MTErrorDomain code:networkResponse.statusCode userInfo:nil];
+        return [NSError errorWithDomain:MTErrorDomain
+                                   code:networkResponse.statusCode
+                               userInfo:nil];
     }
 }
 

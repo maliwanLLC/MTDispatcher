@@ -101,9 +101,9 @@
             NSLog(@"[SERVICE REQUEST]: cancelled request %@", request);
         } else {
             if (task.error == nil) {
-                [request.response parseResponse:(NSHTTPURLResponse *)task.response data:responseData error:error];
+                error = [request.response parseResponse:(NSHTTPURLResponse *)task.response data:responseData];
             } else {
-                error = [NSError errorWithDomain:MTErrorDomain code:task.error.code userInfo:[task.error userInfo]];
+                error =  [NSError errorWithDomain:MTErrorDomain code:task.error.code userInfo:[task.error userInfo]];
             }
         }
         
@@ -112,7 +112,7 @@
         }
     } else {
         // invalid client state or method is not implemented
-        error =[NSError errorWithDomain:MTErrorDomain code:0 userInfo:nil];
+        error = [NSError errorWithDomain:MTErrorDomain code:0 userInfo:nil];
     }
     
     [super processRequest:request error:error];

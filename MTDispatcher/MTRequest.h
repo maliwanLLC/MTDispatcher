@@ -57,6 +57,6 @@ typedef void (^MTRequestCancelBlock)();
     NSDictionary *_jsonDictionary;
 }
 
-- (void)parseResponse:(NSHTTPURLResponse *)networkResponse data:(NSData *)responseData error:(NSError *)error __attribute__((objc_requires_super));
+- (NSError *)parseResponse:(NSHTTPURLResponse *)networkResponse data:(NSData *)responseData __attribute__((objc_requires_super));
 
 @end

@@ -51,12 +51,14 @@ if [ "$reqeust_name" != "" ]; then
 
 @implementation $reqeust_name$response
 
-- (void)parseResponse:(NSHTTPURLResponse *)networkResponse data:(NSData *)responseData error:(NSError *)error {
-    [super parseResponse:networkResponse data:responseData error:error];
+- (NSError *)parseResponse:(NSHTTPURLResponse *)networkResponse data:(NSData *)responseData {
+    NSError *error = [super parseResponse:networkResponse data:responseData];
     
     if (error == nil) {
-    	// Do object/core data model filling from protected variable _jsonDictionary
+        // Do object/core data model filling from protected variable _jsonDictionary
     }
+    
+    return error;
 }
 
 @end
