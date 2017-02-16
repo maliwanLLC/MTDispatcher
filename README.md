@@ -45,19 +45,21 @@ with your custom response subclass
 in MTResponse subclass you should override this method, to process feedback from server
 
 ```objc
-- (void)parseResponse:(NSHTTPURLResponse *)networkResponse data:(NSData *)responseData error:(NSError *)error;
+- (NSError *)parseResponse:(NSHTTPURLResponse *)networkResponse data:(NSData *)responseData;
 ```
 
 super call is required to fill json dictionary/array
 
 ```objc
-- (void)parseResponse:(NSHTTPURLResponse *)networkResponse data:(NSData *)responseData error:(NSError *)error {
-    [super parseResponse:networkResponse data:responseData error:error];
+- (NSError *)parseResponse:(NSHTTPURLResponse *)networkResponse data:(NSData *)responseData {
+    NSError *error = [super parseResponse:networkResponse data:responseData];
     
     if (error == nil) {
         _origin = _jsonDictionary[@"origin"];
         _url = _jsonDictionary[@"url"];
     }
+    
+    return error;
 }
 ```
 
