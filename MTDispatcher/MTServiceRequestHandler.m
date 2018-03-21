@@ -78,11 +78,17 @@
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
         __block NSData *responseData = nil;
         
+        NSDate *methodStart = [NSDate date];
         NSURLSessionDataTask *task = [self.requestSession dataTaskWithRequest:networkRequest
                                                             completionHandler:^(NSData *data,
                                                                                 NSURLResponse *response,
                                                                                 NSError *error) {
                                                                 responseData = data;
+                                                                if (self.logNetwork) {
+                                                                    NSDate *methodFinish = [NSDate date];
+                                                                    NSTimeInterval executionTime = [methodFinish timeIntervalSinceDate:methodStart];
+                                                                    NSLog(@"[NETWORK REQUEST] %@ executionTime = %f", networkRequest.URL.absoluteString, executionTime);
+                                                                }
                                                                 dispatch_semaphore_signal(semaphore);
                                                             }];
         

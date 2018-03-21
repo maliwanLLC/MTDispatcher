@@ -9,6 +9,7 @@
 
 @property (nonatomic, strong) NSMutableSet *currentRequests;
 @property (nonatomic, assign) BOOL logDepotOperations;
+@property (nonatomic, strong) NSArray<dispatch_queue_t> *serialQueues;
 
 @end
 
@@ -19,6 +20,10 @@
     
     if (self != nil) {
         _currentRequests = [[NSMutableSet alloc] init];
+        _serialQueues = @[dispatch_queue_create("com.dispatcher.serialQueue_01", DISPATCH_QUEUE_SERIAL),
+                          dispatch_queue_create("com.dispatcher.serialQueue_02", DISPATCH_QUEUE_SERIAL),
+                          dispatch_queue_create("com.dispatcher.serialQueue_03", DISPATCH_QUEUE_SERIAL),
+                          dispatch_queue_create("com.dispatcher.serialQueue_04", DISPATCH_QUEUE_SERIAL)];
         // load plist config
         NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"MTDispatcher-info" ofType:@"plist"];
         NSDictionary *plistDictionary = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
@@ -41,7 +46,7 @@
         [_currentRequests addObject:request];
     }
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    dispatch_async(_serialQueues[arc4random_uniform(_serialQueues.count)], ^(void) {
         [super processRequest:request error:error];
     });
 }
